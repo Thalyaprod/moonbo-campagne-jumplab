@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moonbo — Campagne de lancement · JUMPLAB</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1A1A18;
+    --pink: #D4537E;
+    --pink-light: #FBEAF0;
+    --pink-mid: #F4C0D1;
+    --gray-mid: #888780;
+    --gray-light: #D3D1C7;
+    --border: rgba(26,26,24,0.12);
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--dark);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo-block { display: flex; align-items: center; gap: 16px; }
+  .logo-badge {
+    background: var(--pink);
+    color: white;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    padding: 6px 12px;
+    border-radius: 4px;
+  }
+  .moonbo-logo-header { display: block; height: 34px; }
+  .header-sub {
+    color: var(--gray-mid);
+    font-size: 13px;
+    font-family: var(--font-body);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+  .header-meta { text-align: right; color: var(--gray-mid); font-size: 12px; letter-spacing: 0.04em; }
+  .header-meta strong {
+    display: block; color: white;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px;
+  }
+
+  /* ── CAMPAIGN STRIP ── */
+  .campaign-strip {
+    background: var(--pink);
+    padding: 9px 48px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .campaign-strip span {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+  .campaign-strip span.active { color: white; }
+  .campaign-sep { color: rgba(255,255,255,0.25) !important; }
+
+  /* ── TABS ── */
+  .tabs-bar {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    padding: 0 48px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-btn {
+    background: none; border: none;
+    border-bottom: 2px solid transparent;
+    padding: 16px 24px;
+    font-family: var(--font-body);
+    font-size: 13px; font-weight: 500;
+    color: var(--gray-mid);
+    cursor: pointer; letter-spacing: 0.03em;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--dark); }
+  .tab-btn.active { color: var(--pink); border-bottom-color: var(--pink); }
+  .tab-num {
+    display: inline-block;
+    width: 18px; height: 18px;
+    background: var(--pink-light); color: var(--pink);
+    border-radius: 50%; font-size: 10px; font-weight: 500;
+    text-align: center; line-height: 18px; margin-right: 8px;
+  }
+  .tab-btn.active .tab-num { background: var(--pink); color: white; }
+
+  /* ── PANELS ── */
+  .tab-panel { display: none; padding: 48px; max-width: 920px; margin: 0 auto; }
+  .tab-panel.active { display: block; }
+
+  /* ── COMMON ── */
+  .section-label {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gray-mid); margin-bottom: 8px;
+  }
+  .panel-headline {
+    font-family: var(--font-display);
+    font-size: 36px; font-weight: 400;
+    line-height: 1.2; margin-bottom: 8px;
+  }
+  .panel-headline em { color: var(--pink); font-style: italic; }
+  .panel-sub { font-size: 15px; color: var(--gray-mid); margin-bottom: 36px; font-weight: 300; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+  .idea-block {
+    background: white; border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px 32px; margin-bottom: 20px;
+  }
+  .idea-block h3 {
+    font-family: var(--font-display); font-size: 18px;
+    font-weight: 400; margin-bottom: 10px;
+  }
+  .idea-block p { font-size: 14px; color: #444; line-height: 1.75; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
+    padding: 4px 10px; border-radius: 20px;
+    border: 1px solid var(--border); color: var(--gray-mid);
+  }
+  .tag.pink { background: var(--pink-light); color: var(--pink); border-color: var(--pink-mid); }
+
+  .quote-block {
+    border-left: 3px solid var(--pink);
+    padding: 16px 24px; background: var(--pink-light);
+    border-radius: 0 8px 8px 0; margin: 28px 0;
+  }
+  .quote-block p {
+    font-family: var(--font-display); font-size: 17px;
+    font-style: italic; color: var(--dark); line-height: 1.6;
+  }
+
+  /* ── SPECS ── */
+  .specs-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 24px;
+  }
+  .spec-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px;
+  }
+  .spec-label-sm {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gray-mid); margin-bottom: 4px;
+  }
+  .spec-val { font-size: 15px; font-weight: 500; color: var(--dark); }
+
+  /* ── STORYBOARD MINI ── */
+  .sb-mini {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 12px; margin-top: 24px;
+  }
+  .sb-mini-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 16px;
+  }
+  .sb-mini-num {
+    font-family: var(--font-display); font-size: 24px;
+    font-weight: 700; color: var(--pink-mid); margin-bottom: 6px;
+  }
+  .sb-mini-title { font-size: 12px; font-weight: 500; color: var(--dark); margin-bottom: 4px; }
+  .sb-mini-time { font-size: 11px; color: var(--gray-mid); }
+
+  /* ── UGC CREATOR ── */
+  .creator-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px;
+    display: flex; gap: 28px; align-items: flex-start; margin-bottom: 24px;
+  }
+  .creator-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--pink-light); border: 2px solid var(--pink-mid);
+    flex-shrink: 0; display: flex;
+    align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 30px;
+    font-style: italic; color: var(--pink);
+    overflow: hidden;
+  }
+  .creator-avatar img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  }
+  .creator-info h2 {
+    font-family: var(--font-display); font-size: 22px;
+    font-weight: 400; margin-bottom: 4px;
+  }
+  .creator-handle {
+    font-size: 12px; color: var(--pink);
+    font-weight: 500; letter-spacing: 0.04em; margin-bottom: 10px;
+  }
+  .creator-info p { font-size: 13px; color: #555; line-height: 1.75; }
+
+  .directive-list { list-style: none; margin-top: 4px; }
+  .directive-list li {
+    display: flex; gap: 12px;
+    padding: 11px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px; color: #444; line-height: 1.55;
+    align-items: flex-start;
+  }
+  .directive-list li:last-child { border-bottom: none; }
+  .directive-list li::before {
+    content: '—'; color: var(--pink);
+    font-size: 11px; flex-shrink: 0; margin-top: 2px;
+  }
+
+  .freedom-block {
+    background: var(--dark); border-radius: 12px;
+    padding: 28px 32px; margin-top: 20px;
+  }
+  .freedom-block h3 {
+    font-family: var(--font-display); font-size: 20px;
+    font-weight: 400; color: white; margin-bottom: 12px;
+  }
+  .freedom-block h3 em { color: var(--pink-mid); font-style: italic; }
+  .freedom-block p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.75; }
+
+  /* ── MOODBOARD GRID ── */
+  .mood-intro { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 28px; }
+
+  .mood-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 190px;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+  .mood-card {
+    border-radius: 14px; overflow: hidden;
+    position: relative; border: 1px solid var(--border);
+  }
+  .mood-card.tall { grid-row: span 2; }
+  .mood-card.wide { grid-column: span 2; }
+
+  .mood-card-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(to top, rgba(26,26,24,0.7), transparent);
+    color: white; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.07em; text-transform: uppercase;
+  }
+  .mood-card-badge {
+    position: absolute; top: 10px; left: 10px;
+    background: rgba(212,83,126,0.92);
+    color: white; font-size: 9px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 4px;
+  }
+  .mood-card-badge.dark { background: rgba(26,26,24,0.85); }
+
+  .mood-card.c-donut       { background: linear-gradient(145deg, #F0D295, #E5B84A, #D4A030); }
+  .mood-card.c-bt           { background: linear-gradient(145deg, #FBEAF0, #F4C0D1, #E89AB8); }
+  .mood-card.c-milk         { background: linear-gradient(145deg, #F5F0E8, #E8E0D0, #D8D0BC); }
+  .mood-card.c-action       { background: linear-gradient(145deg, #2D2A26, #1A1A18); }
+  .mood-card.c-staff        { background: linear-gradient(145deg, #D4537E, #B83060); }
+  .mood-card.c-lieu         { background: linear-gradient(145deg, #1A1A18, #0D0D0C); }
+  .mood-card.c-mise         { background: linear-gradient(145deg, #EDE5D4, #D8CEBC, #C8BC9E); }
+  .mood-card.c-portrait     { background: linear-gradient(145deg, #3D3A36, #2A2826); }
+
+  /* ── MOODBOARD IMAGE ── */
+  .moodboard-img-wrap {
+    margin-bottom: 48px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(26,26,24,0.14);
+  }
+  .moodboard-img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* ── SHOT SECTIONS ── */
+  .shot-section { margin-bottom: 44px; }
+  .shot-section-title {
+    font-family: var(--font-display); font-size: 20px;
+    font-weight: 400; margin-bottom: 18px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .shot-section-title em { color: var(--pink); font-style: italic; }
+
+  .shot-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+  .shot-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .shot-card-img {
+    height: 150px;
+    display: flex; align-items: flex-end; justify-content: flex-start;
+    padding: 12px;
+  }
+  .shot-card-img-badge {
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 4px;
+    background: rgba(26,26,24,0.5);
+    color: white;
+  }
+  .shot-card-body { padding: 16px 18px; }
+  .shot-tag {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--pink); margin-bottom: 4px;
+  }
+  .shot-title { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 5px; }
+  .shot-desc { font-size: 12px; color: var(--gray-mid); line-height: 1.65; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); padding: 20px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 48px;
+  }
+  footer p { font-size: 12px; color: var(--gray-mid); }
+  footer strong { color: white; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header { padding: 16px 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .header-meta { text-align: left; }
+    .campaign-strip { padding: 6px 16px; flex-wrap: wrap; gap: 8px; }
+    .tabs-bar {
+      padding: 0 12px; overflow-x: auto;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .tabs-bar::-webkit-scrollbar { display: none; }
+    .tab-btn { padding: 14px 14px; font-size: 12px; }
+    .tab-panel { padding: 24px 16px; }
+    .panel-headline { font-size: 26px; }
+    .specs-grid { grid-template-columns: repeat(2, 1fr); }
+    .sb-mini { grid-template-columns: repeat(2, 1fr); }
+    .creator-card { flex-direction: column; }
+    .shot-cards { grid-template-columns: 1fr; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .mood-grid { grid-template-columns: repeat(2, 1fr); }
+    .mood-card.wide { grid-column: span 1; }
+    footer { flex-direction: column; gap: 6px; padding: 16px 20px; }
+  }
+
+  /* ── OVERVIEW CARDS ── */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .overview-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: left;
+  }
+  .overview-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(26,26,24,0.12);
+  }
+  .overview-card-top {
+    height: 96px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 14px 18px;
+  }
+  .ov-hero  { background: linear-gradient(145deg, #1A1A18, #2D2A26); }
+  .ov-ugc   { background: linear-gradient(145deg, #D4537E, #B03060); }
+  .ov-shoot { background: linear-gradient(145deg, #C89830, #E5B84A, #D4A030); }
+  .ov-num {
+    font-family: var(--font-display);
+    font-size: 34px; font-weight: 700;
+    color: rgba(255,255,255,0.22);
+    line-height: 1;
+  }
+  .ov-badge {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    background: rgba(255,255,255,0.18);
+    color: white;
+    padding: 4px 10px; border-radius: 4px;
+  }
+  .overview-card-body { padding: 20px 22px 24px; }
+  .overview-card-body h3 {
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 400;
+    margin-bottom: 10px; line-height: 1.35;
+  }
+  .overview-card-body p {
+    font-size: 12px; color: #666;
+    line-height: 1.75; margin-bottom: 12px;
+  }
+  .ov-cta {
+    display: inline-block;
+    font-size: 11px; font-weight: 500;
+    color: var(--pink); letter-spacing: 0.03em;
+    margin-top: 14px;
+  }
+
+  @media print {
+    .tabs-bar, .campaign-strip { display: none; }
+    .tab-panel { display: block !important; page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-block">
+    <span class="logo-badge">JUMP!</span>
+    <svg class="moonbo-logo-header" viewBox="0 0 220 44" xmlns="http://www.w3.org/2000/svg">
+      <text x="110" y="37" text-anchor="middle"
+        font-family="'Arial Rounded MT Bold', 'Nunito', Arial, sans-serif"
+        font-size="42" font-weight="900"
+        stroke="#F4C0D1" stroke-width="13" stroke-linejoin="round"
+        fill="white" paint-order="stroke fill">MOONBO</text>
+    </svg>
+    <span class="header-sub">— Campagne de lancement</span>
+  </div>
+  <div class="header-meta">
+    <strong>Réf. JL-moonbo-2605</strong>
+    Plaza · Cayenne, Guyane · 2026
+  </div>
+</header>
+
+<div class="campaign-strip">
+  <span class="active">00 · Vue d'ensemble</span>
+  <span class="campaign-sep">·</span>
+  <span>01 · Vidéo Hero</span>
+  <span class="campaign-sep">·</span>
+  <span>02 · Vidéo UGC</span>
+  <span class="campaign-sep">·</span>
+  <span>03 · Shoot Photo</span>
+</div>
+
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="showTab('overview', this)">
+    <span class="tab-num">0</span>Vue d'ensemble
+  </button>
+  <button class="tab-btn" onclick="showTab('hero', this)">
+    <span class="tab-num">1</span>Vidéo Hero
+  </button>
+  <button class="tab-btn" onclick="showTab('ugc', this)">
+    <span class="tab-num">2</span>Vidéo UGC — Thanygram
+  </button>
+  <button class="tab-btn" onclick="showTab('shoot', this)">
+    <span class="tab-num">3</span>Shoot Photo
+  </button>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PANEL 0 — VUE D'ENSEMBLE
+════════════════════════════════════════ -->
+<div id="tab-overview" class="tab-panel active">
+  <p class="section-label">Campagne · Moonbo · Plaza Cayenne · 2026</p>
+  <h1 class="panel-headline">Une ouverture.<br><em>Trois contenus.</em></h1>
+  <p class="panel-sub">Stratégie de lancement digitale — JUMPLAB × Moonbo Guyane</p>
+
+  <div class="idea-block">
+    <h3>La campagne</h3>
+    <p>Pour l'ouverture de Moonbo à Plaza Cayenne, JUMPLAB propose une campagne en trois volets complémentaires : un film hero pensé pour stopper le scroll, un contenu UGC ancré dans l'authenticité locale, et une banque d'images produit pour alimenter les réseaux sur le long terme. Chaque contenu a un rôle précis dans le funnel et une cible d'impact différente.</p>
+    <div class="tag-row">
+      <span class="tag pink">Lancement · Ouverture</span>
+      <span class="tag pink">Cayenne · Guyane</span>
+      <span class="tag">Reels · TikTok · Feed</span>
+      <span class="tag">3 livrables</span>
+    </div>
+  </div>
+
+  <!-- CARDS OVERVIEW -->
+  <div class="overview-grid">
+
+    <div class="overview-card" onclick="showTabById('hero')">
+      <div class="overview-card-top ov-hero">
+        <div class="ov-num">01</div>
+        <div class="ov-badge">Vidéo Hero</div>
+      </div>
+      <div class="overview-card-body">
+        <h3>Pornfood + Révélation du lieu</h3>
+        <p>Film de lancement 9:16 en 30–35 sec. Accroche macro sensorielle, révélation de la façade Plaza, montage cut sur le beat, clôture en POV employé.</p>
+        <div class="tag-row">
+          <span class="tag pink">30–35 sec</span>
+          <span class="tag">Reels · TikTok</span>
+          <span class="tag">1 figurant</span>
+        </div>
+        <div class="ov-cta">Voir le brief complet →</div>
+      </div>
+    </div>
+
+    <div class="overview-card" onclick="showTabById('ugc')">
+      <div class="overview-card-top ov-ugc">
+        <div class="ov-num">02</div>
+        <div class="ov-badge">Vidéo UGC</div>
+      </div>
+      <div class="overview-card-body">
+        <h3>Un lieu 100% gourmand — Thanygram</h3>
+        <p>Contenu créateur confié à Bethany Rebin (@thanygram_), créatrice locale ancrée en Guyane. Style libre, authenticité totale. Sujet : la découverte d'un nouveau lieu gourmand.</p>
+        <div class="tag-row">
+          <span class="tag pink">Style libre</span>
+          <span class="tag">15–60 sec</span>
+          <span class="tag">Créateur local</span>
+        </div>
+        <div class="ov-cta">Voir le brief créateur →</div>
+      </div>
+    </div>
+
+    <div class="overview-card" onclick="showTabById('shoot')">
+      <div class="overview-card-top ov-shoot">
+        <div class="ov-num">03</div>
+        <div class="ov-badge">Shoot Photo</div>
+      </div>
+      <div class="overview-card-body">
+        <h3>Produits · Staff · Locaux</h3>
+        <p>Banque d'images pour alimenter les réseaux sur la durée. Focus produit macro, mises en situation, portraits staff et prises de vue des locaux Plaza.</p>
+        <div class="tag-row">
+          <span class="tag pink">Donuts · Bubble Tea · Milkshakes</span>
+          <span class="tag">Feed · Stories</span>
+        </div>
+        <div class="ov-cta">Voir le moodboard →</div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+  <p class="section-label">Objectifs par contenu</p>
+
+  <div class="specs-grid">
+    <div class="spec-card">
+      <div class="spec-label-sm">Vidéo Hero</div>
+      <div class="spec-val">Notoriété · Scroll-stop</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label-sm">Vidéo UGC</div>
+      <div class="spec-val">Confiance · Bouche-à-oreille</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label-sm">Shoot Photo</div>
+      <div class="spec-val">Banque long terme · Feed</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label-sm">Format principal</div>
+      <div class="spec-val">9:16 vertical</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label-sm">Plateformes</div>
+      <div class="spec-val">Instagram · TikTok</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label-sm">Lieu</div>
+      <div class="spec-val">Plaza · Cayenne</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PANEL 1 — VIDÉO HERO
+════════════════════════════════════════ -->
+<div id="tab-hero" class="tab-panel">
+  <p class="section-label">Campagne · Volet 01 · Format 9:16</p>
+  <h1 class="panel-headline">Vidéo Hero.<br><em>Pornfood + Révélation du lieu.</em></h1>
+  <p class="panel-sub">Film de lancement — 30 à 35 secondes — Reels · TikTok</p>
+
+  <div class="idea-block">
+    <h3>L'idée centrale</h3>
+    <p>La vidéo hero joue sur une tension simple : on voit les produits avant de savoir où on est. Les premières secondes sont purement sensorielles — macro extrême, slow-motion, textures qui arrêtent le scroll. Puis la caméra recule et la façade Moonbo à Plaza se révèle. Le spectateur comprend : c'est ici, c'est maintenant, c'est nouveau.</p>
+    <p style="margin-top:10px">Une voix off à la troisième personne — ton mystérieux, presque journalistique — installe la curiosité avant de lâcher les informations produit. Le tout se termine en POV : l'employé pose la boisson, le spectateur la prend. La phrase de clôture s'adresse directement à lui.</p>
+    <div class="tag-row">
+      <span class="tag pink">Pornfood macro</span>
+      <span class="tag pink">Voix narrative 3e personne</span>
+      <span class="tag pink">POV final</span>
+      <span class="tag">Reels · TikTok</span>
+      <span class="tag">30–35 sec</span>
+      <span class="tag">1 figurant max</span>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <p>"Ils viennent d'ouvrir une nouvelle boutique à Plaza… et on en parle déjà."</p>
+  </div>
+
+  <hr class="divider">
+  <p class="section-label">Structure · 4 séquences</p>
+
+  <div class="sb-mini">
+    <div class="sb-mini-card">
+      <div class="sb-mini-num">01</div>
+      <div class="sb-mini-title">Accroche macro</div>
+      <div class="sb-mini-time">0 — 5 sec · Silence</div>
+    </div>
+    <div class="sb-mini-card">
+      <div class="sb-mini-num">02</div>
+      <div class="sb-mini-title">Révélation lieu</div>
+      <div class="sb-mini-time">5 — 12 sec · Voix off</div>
+    </div>
+    <div class="sb-mini-card">
+      <div class="sb-mini-num">03</div>
+      <div class="sb-mini-title">Produits en action</div>
+      <div class="sb-mini-time">12 — 24 sec · Cuts beat</div>
+    </div>
+    <div class="sb-mini-card">
+      <div class="sb-mini-num">04</div>
+      <div class="sb-mini-title">POV employé</div>
+      <div class="sb-mini-time">24 — 35 sec · Face caméra</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <p class="section-label">Fiche technique</p>
+  <div class="specs-grid">
+    <div class="spec-card">
+      <div class="spec-label-sm">Format</div>
+      <div class="spec-val">9:16 vertical</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label-sm">Durée cible</div>
+      <div class="spec-val">30 à 35 sec</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label-sm">Diffusion</div>
+      <div class="spec-val">Reels · TikTok</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label-sm">Figurants</div>
+      <div class="spec-val">1 employé</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label-sm">Lieu</div>
+      <div class="spec-val">Plaza, Cayenne</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label-sm">Narration</div>
+      <div class="spec-val">Voix off + texte écran</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PANEL 2 — VIDÉO UGC
+════════════════════════════════════════ -->
+<div id="tab-ugc" class="tab-panel">
+  <p class="section-label">Campagne · Volet 02 · Contenu créateur</p>
+  <h1 class="panel-headline">Vidéo UGC.<br><em>Un lieu 100% gourmand.</em></h1>
+  <p class="panel-sub">Contenu authentique par un créateur local — style libre, impact maximum</p>
+
+  <div class="creator-card">
+    <div class="creator-avatar"><img src="data:image/jpeg;base64,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" alt="Bethany Rebin"></div>
+    <div class="creator-info">
+      <h2>Bethany Rebin</h2>
+      <div class="creator-handle">@thanygram_ · Créatrice de contenu · Guyane française</div>
+      <p>Créatrice de contenu lifestyle basée en Guyane, Bethany partage sa vie de maman, ses découvertes du quotidien et des collaborations variées — avec une touche food de temps en temps. Son univers est spontané, chaleureux, ancré dans le réel. C'est précisément ce naturel et cette proximité avec sa communauté qui font sa valeur sur ce brief : une recommandation de sa part, ça ressemble à un conseil d'amie.</p>
+    </div>
+  </div>
+
+  <div class="idea-block">
+    <h3>Le brief créateur</h3>
+    <p>Le sujet central est <strong>"un nouveau lieu 100% gourmand"</strong>. Bethany est libre d'exprimer sa découverte à sa manière — ton, angle, format, montage. On ne script pas, on ne surcharge pas le brief. C'est son regard, son style, sa façon de partager qui créent la connexion avec sa communauté. On lui fait confiance pour trouver le meilleur impact possible.</p>
+    <div class="tag-row">
+      <span class="tag pink">Style libre</span>
+      <span class="tag pink">Authenticité avant tout</span>
+      <span class="tag">Découverte locale</span>
+      <span class="tag">Réaction première visite</span>
+      <span class="tag">15 à 60 sec</span>
+      <span class="tag">Reels · TikTok</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <p class="section-label">Directives minimum à communiquer</p>
+
+  <div class="idea-block">
+    <h3>Ce qu'on lui indique</h3>
+    <ul class="directive-list">
+      <li>Mentionner les 3 univers produit : <strong>donuts, bubble tea, milkshakes</strong> — à sa façon, sans obligation de les citer tous ensemble</li>
+      <li>Indiquer clairement la <strong>localisation Plaza, Cayenne</strong> et la période d'ouverture</li>
+      <li>Filmer en <strong>9:16 natif</strong> — qualité smartphone suffit, pas besoin de matériel pro</li>
+      <li>Taguer le compte <strong>@moonbo</strong> et utiliser le hashtag de lancement (à définir)</li>
+      <li>Livrer une version brute + une version finale éditée avec sous-titres si applicable</li>
+    </ul>
+  </div>
+
+  <div class="freedom-block">
+    <h3>Sa liberté <em>créative — ne pas toucher</em></h3>
+    <p>Angle de narration, format de montage, musique, transitions, voix off ou face caméra, humour ou émotion, réaction ou narration — tout est à sa discrétion. On ne lui impose pas de script, on ne retouche pas son style, on ne lui demande pas de "ressembler" à la vidéo hero. L'UGC est efficace précisément parce qu'il est différent. On ne corrige pas ce qui fait sa valeur.</p>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PANEL 3 — SHOOT PHOTO
+════════════════════════════════════════ -->
+<div id="tab-shoot" class="tab-panel">
+  <p class="section-label">Campagne · Volet 03 · Contenu statique</p>
+  <h1 class="panel-headline">Shoot Photo.<br><em>Produits · Staff · Locaux.</em></h1>
+  <p class="panel-sub">Banque d'images pour les réseaux, le site et les communications Moonbo</p>
+
+  <!-- MOODBOARD -->
+  <p class="section-label">Moodboard — références visuelles</p>
+  <p class="mood-intro">Ambiance générale du shoot : lumière naturelle chaude, textures prononcées, palette crème et rose poudré. Chaque plan doit transmettre la gourmandise avant l'information. On privilégie le macro, la profondeur de champ réduite et les matières.</p>
+
+  <div class="moodboard-img-wrap">
+    <img src="MOODBOARDS moono.png" alt="Moodboard Moonbo shoot photo" class="moodboard-img">
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 1 : FOCUS PRODUIT -->
+  <div class="shot-section">
+    <h3 class="shot-section-title">Focus produit — <em>Milkshakes · Donuts · Bubble Tea</em></h3>
+    <div class="shot-cards">
+
+      <div class="shot-card">
+        <div class="shot-card-img" style="background-image: url('MOODBOARDS moono.png'); background-size: 300% 300%; background-repeat: no-repeat; background-position: 0% 0%;">
+          <span class="shot-card-img-badge">Macro</span>
+        </div>
+        <div class="shot-card-body">
+          <div class="shot-tag">Donut</div>
+          <div class="shot-title">Vue du dessus · Glaçage macro</div>
+          <div class="shot-desc">Plongée stricte, fond neutre crème ou papier froissé. Slow-motion au versement du glaçage. Topping en gros plan.</div>
+        </div>
+      </div>
+
+      <div class="shot-card">
+        <div class="shot-card-img" style="background-image: url('MOODBOARDS moono.png'); background-size: 300% 300%; background-repeat: no-repeat; background-position: 0% 50%;">
+          <span class="shot-card-img-badge">Produit</span>
+        </div>
+        <div class="shot-card-body">
+          <div class="shot-tag">Bubble Tea</div>
+          <div class="shot-title">Gobelet tenu · Perles visibles</div>
+          <div class="shot-desc">Gobelet Moonbo en main, perles bien visibles au fond. Fond épuré ou vitrine boutique en bokeh. Lumière latérale.</div>
+        </div>
+      </div>
+
+      <div class="shot-card">
+        <div class="shot-card-img" style="background-image: url('MOODBOARDS moono.png'); background-size: 300% 300%; background-repeat: no-repeat; background-position: 100% 0%;">
+          <span class="shot-card-img-badge">Pornfood</span>
+        </div>
+        <div class="shot-card-body">
+          <div class="shot-tag">Milkshake</div>
+          <div class="shot-title">Chantilly généreuse · Topping</div>
+          <div class="shot-desc">Vue de face légère plongée. Chantilly bien montée, topping coulant, paille colorée. Le plus gourmand des trois.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2 : INDIVIDUEL & MISE EN SITUATION -->
+  <div class="shot-section">
+    <h3 class="shot-section-title">Produits <em>individuels & mise en situation</em></h3>
+    <div class="shot-cards">
+
+      <div class="shot-card">
+        <div class="shot-card-img" style="background-image: url('MOODBOARDS moono.png'); background-size: 300% 300%; background-repeat: no-repeat; background-position: 50% 100%;">
+          <span class="shot-card-img-badge">Portrait produit</span>
+        </div>
+        <div class="shot-card-body">
+          <div class="shot-tag">Individuel</div>
+          <div class="shot-title">Produit seul · Fond épuré</div>
+          <div class="shot-desc">Chaque produit photographié seul sur fond crème ou marbre. Ombre douce. Format portrait 4:5 pour les réseaux.</div>
+        </div>
+      </div>
+
+      <div class="shot-card">
+        <div class="shot-card-img" style="background-image: url('MOODBOARDS moono.png'); background-size: 300% 300%; background-repeat: no-repeat; background-position: 50% 0%;">
+          <span class="shot-card-img-badge">Flat lay</span>
+        </div>
+        <div class="shot-card-body">
+          <div class="shot-tag">Mise en situation</div>
+          <div class="shot-title">Flat lay · Les 3 univers ensemble</div>
+          <div class="shot-desc">Arrangement des 3 produits en vue du dessus. Table bois, accessoires café, fleurs ou feuille tropicale. Ambiance locale.</div>
+        </div>
+      </div>
+
+      <div class="shot-card">
+        <div class="shot-card-img" style="background-image: url('MOODBOARDS moono.png'); background-size: 300% 300%; background-repeat: no-repeat; background-position: 100% 50%;">
+          <span class="shot-card-img-badge">Lifestyle</span>
+        </div>
+        <div class="shot-card-body">
+          <div class="shot-tag">Lifestyle</div>
+          <div class="shot-title">Produit en main · POV client</div>
+          <div class="shot-desc">Main qui saisit le produit au comptoir. Vue subjective. Manucure soignée, accessoire discret. Intime et appelant à l'action.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 3 : STAFF & LOCAUX -->
+  <div class="shot-section">
+    <h3 class="shot-section-title">Staff <em>& Locaux</em></h3>
+    <div class="shot-cards">
+
+      <div class="shot-card">
+        <div class="shot-card-img" style="background-image: url('MOODBOARDS moono.png'); background-size: 300% 300%; background-repeat: no-repeat; background-position: 100% 100%;">
+          <span class="shot-card-img-badge">Action</span>
+        </div>
+        <div class="shot-card-body">
+          <div class="shot-tag">Staff — Mains</div>
+          <div class="shot-title">Préparation · Gestes métier</div>
+          <div class="shot-desc">Plans serrés sur les gestes : versement, assemblage, finition chantilly. Tablier Moonbo visible. Pas besoin de visage — les mains suffisent.</div>
+        </div>
+      </div>
+
+      <div class="shot-card">
+        <div class="shot-card-img" style="background-image: url('MOODBOARDS moono.png'); background-size: 300% 300%; background-repeat: no-repeat; background-position: 50% 50%;">
+          <span class="shot-card-img-badge">Portrait</span>
+        </div>
+        <div class="shot-card-body">
+          <div class="shot-tag">Staff — Portrait</div>
+          <div class="shot-title">Employé · Comptoir · Regard caméra</div>
+          <div class="shot-desc">Employé derrière le comptoir, regard caméra ou de 3/4. Ambiance naturelle, sourire authentique. Lumière boutique. Tablier Moonbo net.</div>
+        </div>
+      </div>
+
+      <div class="shot-card">
+        <div class="shot-card-img" style="background-image: url('MOODBOARDS moono.png'); background-size: 300% 300%; background-repeat: no-repeat; background-position: 0% 100%;">
+          <span class="shot-card-img-badge">Architecture</span>
+        </div>
+        <div class="shot-card-body">
+          <div class="shot-tag">Locaux</div>
+          <div class="shot-title">Intérieur · Façade Plaza</div>
+          <div class="shot-desc">Plan large de l'intérieur boutique, vitrine lisible, façade Moonbo en contexte Plaza. Lumière naturelle privilégiée. Heure dorée si possible.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<footer>
+  <p><strong>JUMPLAB</strong> · Agence créative · Cayenne, Guyane française</p>
+  <p>georges@jumplab.fr · 0694 45 33 47 · Réf. JL-moonbo-2605</p>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function showTabById(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    if (b.getAttribute('onclick') === "showTab('" + id + "', this)") b.classList.add('active');
+  });
+  document.getElementById('tab-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
